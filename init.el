@@ -53,6 +53,7 @@ values."
      syntax-checking
      version-control
 	 chinese
+     my-layer
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -325,8 +326,6 @@ you should place your code here."
   (autoload 'iimage-mode "iimage" "support inline image minor mode" t)
   (autoload 'turn-on-iimage-mode "iimage" "turn on inline image minor mode" t)
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
-  (setq frame-title-format "jianghong@%b")
-  (setq frame-title-format '("%S" (buffer-file-name "%f" (dired-directory dired-directory "%b"))))
   (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (calc . t)))
   (defun run-command(cmd)
     (shell-command (concat "start /b " cmd)))
