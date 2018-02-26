@@ -36,20 +36,23 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ivy
+     ;; ivy
+     helm
      auto-completion
      better-defaults
      emacs-lisp
-     git
+     ;; git
      markdown
      org
+     lua
+     c-c++
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
-     chinese
+	 chinese
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -133,8 +136,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("DejaVu Sans Mono"
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -260,7 +263,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -314,21 +317,77 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (setq-default tab-width 4)
+  (setq-default lua-indent-level 4)
+  (setq-default c-c++-indent-level 4)
+  (setq projectile-enable-caching t)
+  (setq projectile-indexing-method 'native)
+  (autoload 'iimage-mode "iimage" "support inline image minor mode" t)
+  (autoload 'turn-on-iimage-mode "iimage" "turn on inline image minor mode" t)
+  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+  (setq frame-title-format "jianghong@%b")
+  (setq frame-title-format '("%S" (buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+  (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (calc . t)))
+  (defun run-command(cmd)
+    (shell-command (concat "start /b " cmd)))
+  (defun src-res-up()
+    "src-res-update"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:update /path:\""
+      (concat (projectile-project-root) "src*" (projectile-project-root) "res*" (projectile-project-root) "frameworks")
+      "\" /closeonend:0")))
+  (defun src-res-ci()
+    "src-res-commit"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:commit /path:\""
+      (concat (projectile-project-root) "src*" (projectile-project-root) "res")
+      "\" /closeonend:0")))
+  (defun current-file-up()
+    "update current file"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:update /path:\""
+      (buffer-file-name)
+      "\" /closeonend:0")))
+  (defun current-file-log()
+    "show current file log"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:log /path:\"" (buffer-file-name) "\" closeonend:0")))
+
+  (defun current-file-ci()
+    "update current file"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:commit /path:\""
+      (buffer-file-name)
+      "\" /closeonend:0")))
+  (defun open-current-folder()
+    "open current buffer folder"
+    (interactive)
+    (run-command (concat "start /b " (file-name-directory buffer-file-name))))
+  (defun move-to-brance-and-commit()
+    "move file to brance folder and commit it."
+    (interactive)
+    ())
+  (defun run-game()
+    "run game"
+    (interactive)
+    (run-command "start /b .\v4run.bat"))
+  (evil-leader/set-key
+    "ou" 'src-res-up
+    "oc" 'src-res-ci
+    "ol" 'current-file-log
+    "or" 'run-game
+    "of" 'open-current-folder)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (youdao-dictionary names chinese-word-at-point unfill smeargle pyim pyim-basedict pangu-spacing orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-gitflow htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck find-by-pinyin-dired evil-magit magit magit-popup git-commit ghub with-editor diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ace-pinyin pinyinlib ac-ispell auto-complete ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
