@@ -40,19 +40,24 @@ values."
      helm
      auto-completion
      better-defaults
-     emacs-lisp
-     ;; git
-     markdown
+     ranger
+     git
      org
+     markdown
+     emacs-lisp
      lua
-     c-c++
+     (c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
+     javascript
+     html
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
-     ;; version-control
-	 chinese
+     version-control
+	 (chinese :package youdao-dictionary fcitx
+              :variables chinese-enable-fcitx nil
+              chinese-enable-youdao-dict t)
 	 ;; game-layer
      )
    ;; List of additional packages that will be installed without being
@@ -323,6 +328,7 @@ you should place your code here."
   (setq-default c-c++-indent-level 4)
   (setq projectile-enable-caching t)
   (setq projectile-indexing-method 'native)
+  (setq frame-title-format "%b [%I] %f")
   (autoload 'iimage-mode "iimage" "support inline image minor mode" t)
   (autoload 'turn-on-iimage-mode "iimage" "turn on inline image minor mode" t)
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
@@ -397,7 +403,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-ispell wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy pyim-basedict org-category-capture alert log4e gntp markdown-mode fringe-helper git-gutter+ git-commit with-editor git-gutter flyspell-correct pos-tip flycheck company yasnippet pinyinlib auto-complete youdao-dictionary ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline restart-emacs request rainbow-delimiters pyim popwin persp-mode pcre2el paradox pangu-spacing org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc macrostep lua-mode lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump disaster diminish diff-hl define-word company-statistics company-c-headers column-enforce-mode cmake-mode clean-aindent-mode clang-format bracketed-paste auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell)))
+    (web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode livid-mode skewer-mode simple-httpd less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-css-scss haml-mode emmet-mode company-web web-completion-data company-tern dash-functional tern coffee-mode names chinese-word-at-point smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup ghub async let-alist ranger helm-ispell wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy pyim-basedict org-category-capture alert log4e gntp markdown-mode fringe-helper git-gutter+ git-commit with-editor git-gutter flyspell-correct pos-tip flycheck company yasnippet pinyinlib auto-complete youdao-dictionary ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline restart-emacs request rainbow-delimiters pyim popwin persp-mode pcre2el paradox pangu-spacing org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc macrostep lua-mode lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump disaster diminish diff-hl define-word company-statistics company-c-headers column-enforce-mode cmake-mode clean-aindent-mode clang-format bracketed-paste auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell)))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
