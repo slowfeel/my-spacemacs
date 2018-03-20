@@ -45,20 +45,21 @@ values."
      (vinegar :variables vinegar-reuse-dired-buffer t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
-     ;; (git :variables
-     ;;      git-magit-status-fullscreen t
-     ;;      magit-push-always-verify nil
-     ;;      magit-save-repository-buffers 'dontask
-     ;;      magit-revert-buffers 'silent
-     ;;      magit-refs-show-commit-count 'all
-     ;;      magit-revision-show-gravatars nil)
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
+
+     (git :variables
+          git-magit-status-fullscreen t
+          magit-push-always-verify nil
+          magit-save-repository-buffers 'dontask
+          magit-revert-buffers 'silent
+          magit-refs-show-commit-count 'all
+          magit-revision-show-gravatars nil)
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       :disabled-for org markdown)
      ;; (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
      ;;      osx-command-as 'super)
-     restclient
+     ;; restclient
      (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
      (shell :variables shell-default-shell 'eshell)
      ;; docker
@@ -68,20 +69,20 @@ values."
      (org :variables org-want-todo-bindings t)
      ;; gpu
      yaml
-     react
+     ;; react
      (python :variables
              python-test-runner '(nose pytest))
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      lua
      html
-     javascript
-     (typescript :variables
-                typescript-fmt-on-save nil
-                typescript-fmt-tool 'typescript-formatter)
+     ;; javascript
+     ;; (typescript :variables
+     ;;            typescript-fmt-on-save nil
+     ;;            typescript-fmt-tool 'typescript-formatter)
      emacs-lisp
-     (clojure :variables clojure-enable-fancify-symbols t)
-     racket
+     ;; (clojure :variables clojure-enable-fancify-symbols t)
+     ;; racket
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
      ;; zilongshanren
@@ -153,7 +154,7 @@ values."
    ;; (default 'vim)
    dotspacemacs-editing-style 'vim
 
-   dotspacemacs-mode-line-theme 'all-the-icons
+   dotspacemacs-mode-line-theme 'spacemacs
 
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
@@ -437,8 +438,8 @@ values."
   ;; (setq-default tab-width 4)
   ;; (setq-default lua-indent-level 4)
   ;; (setq-default c-c++-indent-level 4)
-  ;; (setq projectile-enable-caching t)
-  ;; (setq projectile-indexing-method 'native)
+  (setq projectile-enable-caching t)
+  (setq projectile-indexing-method 'native)
   ;; (autoload 'iimage-mode "iimage" "support inline image minor mode" t)
   ;; (autoload 'turn-on-iimage-mode "iimage" "turn on inline image minor mode" t)
   ;; (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
@@ -511,4 +512,18 @@ values."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub with-editor youdao-dictionary yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify uuidgen use-package unfill toc-org tide tagedit string-inflection spaceline-all-the-icons smex slim-mode shell-pop scss-mode sayid sass-mode restart-emacs request ranger rainbow-mode rainbow-identifiers racket-mode pyvenv pytest pyenv-mode py-isort pug-mode prodigy popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer origami org-pomodoro org-mime org-brain open-junk-file ob-restclient ob-http neotree nameless mwim multi-term move-text mmm-mode markdown-toc macrostep live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc ivy-xref ivy-rtags ivy-hydra indent-guide importmagic impatient-mode ibuffer-projectile hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers google-c-style golden-ratio gnuplot ggtags fuzzy font-lock+ flyspell-correct-ivy flycheck-rtags flycheck-pos-tip flx fill-column-indicator expand-region evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lion evil-iedit-state evil-cleverparens evil-anzu eshell-z eshell-prompt-extras esh-help engine-mode emmet-mode elisp-slime-nav editorconfig dumb-jump diminish cython-mode counsel-gtags counsel-css company-web company-tern company-statistics company-rtags company-restclient company-lua company-c-headers company-anaconda column-enforce-mode color-identifiers-mode coffee-mode clojure-snippets clojure-cheatsheet clj-refactor cider-eval-sexp-fu centered-cursor-mode bind-map auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 )
