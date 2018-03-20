@@ -32,6 +32,7 @@ values."
    dotspacemacs-configuration-layers
    '(
      ivy
+     ;; helm
      better-defaults
      ranger
      colors
@@ -44,13 +45,13 @@ values."
      (vinegar :variables vinegar-reuse-dired-buffer t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
-     (git :variables
-          git-magit-status-fullscreen t
-          magit-push-always-verify nil
-          magit-save-repository-buffers 'dontask
-          magit-revert-buffers 'silent
-          magit-refs-show-commit-count 'all
-          magit-revision-show-gravatars nil)
+     ;; (git :variables
+     ;;      git-magit-status-fullscreen t
+     ;;      magit-push-always-verify nil
+     ;;      magit-save-repository-buffers 'dontask
+     ;;      magit-revert-buffers 'silent
+     ;;      magit-refs-show-commit-count 'all
+     ;;      magit-revision-show-gravatars nil)
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
@@ -65,7 +66,7 @@ values."
      ;; deft
      markdown
      (org :variables org-want-todo-bindings t)
-     gpu
+     ;; gpu
      yaml
      react
      (python :variables
@@ -83,7 +84,7 @@ values."
      racket
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
-     zilongshanren
+     ;; zilongshanren
      (chinese :packages youdao-dictionary fcitx
               :variables chinese-enable-fcitx nil
               chinese-enable-youdao-dict t)
@@ -92,7 +93,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(sicp)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages
@@ -174,14 +175,14 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
-                         solarized-dark)
+   dotspacemacs-themes '(spacemacs-dark
+                         spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+   dotspacemacs-default-font '("DejaVu Sans Mono"
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -274,7 +275,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup nil
+   dotspacemacs-fullscreen-at-startup t
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -303,7 +304,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'origami
@@ -345,89 +346,88 @@ values."
 
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
   ;; (setq tramp-mode nil)
-  (setq tramp-ssh-controlmaster-options
-        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+  ;; (setq tramp-ssh-controlmaster-options
+  ;;       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 
-  ;; ss proxy. But it will cause anacond-mode failed.
-  (setq socks-server '("Default server" "127.0.0.1" 1080 5))
-  (setq evil-shift-round nil)
-  (setq byte-compile-warnings '(not obsolete))
-  (setq warning-minimum-level :error)
-  ;; hack for remove purpose mode
-  (setq purpose-mode nil)
+  ;; ;; ss proxy. But it will cause anacond-mode failed.
+  ;; (setq socks-server '("Default server" "127.0.0.1" 1080 5))
+  ;; (setq evil-shift-round nil)
+  ;; (setq byte-compile-warnings '(not obsolete))
+  ;; (setq warning-minimum-level :error)
+  ;; ;; hack for remove purpose mode
+  ;; (setq purpose-mode nil)
   )
 
 (defun dotspacemacs/user-config ()
   ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
-      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
+      (spacemacs//set-monospaced-font "DejaVu Sans Mono" "Hiragino Sans GB" 14 16)))
 
-  ;; Setting Chinese Font
-  (when (and (spacemacs/system-is-mswindows) window-system)
-    (setq ispell-program-name "aspell")
-    (setq w32-pass-alt-to-system nil)
-    (setq w32-apps-modifier 'super)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font)
-                        charset
-                        (font-spec :family "Microsoft Yahei" :size 14))))
+  ;; ;; Setting Chinese Font
+  ;; (when (and (spacemacs/system-is-mswindows) window-system)
+  ;;   (setq ispell-program-name "aspell")
+  ;;   (setq w32-pass-alt-to-system nil)
+  ;;   (setq w32-apps-modifier 'super)
+  ;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
+  ;;     (set-fontset-font (frame-parameter nil 'font)
+  ;;                       charset
+  ;;                       (font-spec :family "Microsoft Yahei" :size 14))))
 
-  (fset 'evil-visual-update-x-selection 'ignore)
+  ;; (fset 'evil-visual-update-x-selection 'ignore)
 
-  ;; force horizontal split window
-  (setq split-width-threshold 120)
-  (linum-relative-on)
+  ;; ;; force horizontal split window
+  ;; (setq split-width-threshold 120)
 
-  (spacemacs|add-company-backends :modes text-mode)
+  ;; (spacemacs|add-company-backends :modes text-mode)
 
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-  ;; temp fix for ivy-switch-buffer
-  ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
+  ;; ;; temp fix for ivy-switch-buffer
+  ;; ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
 
-  (global-hungry-delete-mode t)
-  (spacemacs|diminish helm-gtags-mode)
-  (spacemacs|diminish ggtags-mode)
-  (spacemacs|diminish which-key-mode)
-  (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
-  (spacemacs|diminish counsel-mode)
+  ;; (global-hungry-delete-mode t)
+  ;; (spacemacs|diminish helm-gtags-mode)
+  ;; (spacemacs|diminish ggtags-mode)
+  ;; (spacemacs|diminish which-key-mode)
+  ;; (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
+  ;; (spacemacs|diminish counsel-mode)
 
-  (evilified-state-evilify-map special-mode-map :mode special-mode)
+  ;; (evilified-state-evilify-map special-mode-map :mode special-mode)
 
-  (add-to-list 'auto-mode-alist
-               '("Capstanfile\\'" . yaml-mode))
+  ;; (add-to-list 'auto-mode-alist
+  ;;              '("Capstanfile\\'" . yaml-mode))
 
-  (defun js-indent-line ()
-    "Indent the current line as JavaScript."
-    (interactive)
-    (let* ((parse-status
-            (save-excursion (syntax-ppss (point-at-bol))))
-           (offset (- (point) (save-excursion (back-to-indentation) (point)))))
-      (if (nth 3 parse-status)
-          'noindent
-        (indent-line-to (js--proper-indentation parse-status))
-        (when (> offset 0) (forward-char offset)))))
+  ;; (defun js-indent-line ()
+  ;;   "Indent the current line as JavaScript."
+  ;;   (interactive)
+  ;;   (let* ((parse-status
+  ;;           (save-excursion (syntax-ppss (point-at-bol))))
+  ;;          (offset (- (point) (save-excursion (back-to-indentation) (point)))))
+  ;;     (if (nth 3 parse-status)
+  ;;         'noindent
+  ;;       (indent-line-to (js--proper-indentation parse-status))
+  ;;       (when (> offset 0) (forward-char offset)))))
 
-  (global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
-  (defun un-indent-by-removing-4-spaces ()
-    "remove 4 spaces from beginning of of line"
-    (interactive)
-    (save-excursion
-      (save-match-data
-        (beginning-of-line)
-        ;; get rid of tabs at beginning of line
-        (when (looking-at "^\\s-+")
-          (untabify (match-beginning 0) (match-end 0)))
-        (when (looking-at (concat "^" (make-string tab-width ?\ )))
-          (replace-match "")))))
+  ;; (global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
+  ;; (defun un-indent-by-removing-4-spaces ()
+  ;;   "remove 4 spaces from beginning of of line"
+  ;;   (interactive)
+  ;;   (save-excursion
+  ;;     (save-match-data
+  ;;       (beginning-of-line)
+  ;;       ;; get rid of tabs at beginning of line
+  ;;       (when (looking-at "^\\s-+")
+  ;;         (untabify (match-beginning 0) (match-end 0)))
+  ;;       (when (looking-at (concat "^" (make-string tab-width ?\ )))
+  ;;         (replace-match "")))))
 
-  (defun zilongshanren/toggle-major-mode ()
-    (interactive)
-    (if (eq major-mode 'fundamental-mode)
-        (set-auto-mode)
-      (fundamental-mode)))
-  (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
+  ;; (defun zilongshanren/toggle-major-mode ()
+  ;;   (interactive)
+  ;;   (if (eq major-mode 'fundamental-mode)
+  ;;       (set-auto-mode)
+  ;;     (fundamental-mode)))
+  ;; (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
 
   ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
   (setq-default tab-width 4)
