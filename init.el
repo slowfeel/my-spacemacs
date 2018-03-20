@@ -37,7 +37,7 @@ values."
      colors
      prodigy
      search-engine
-     graphviz
+     ;; graphviz
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
      (spell-checking :variables spell-checking-enable-by-default nil)
@@ -55,14 +55,14 @@ values."
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       :disabled-for org markdown)
-     (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
-          osx-command-as 'super)
+     ;; (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
+     ;;      osx-command-as 'super)
      restclient
      (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
      (shell :variables shell-default-shell 'eshell)
      ;; docker
-     latex
-     deft
+     ;; latex
+     ;; deft
      markdown
      (org :variables org-want-todo-bindings t)
      gpu
@@ -430,6 +430,75 @@ values."
   (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
 
   ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
+  (setq-default tab-width 4)
+  (setq-default lua-indent-level 4)
+  (setq-default c-c++-indent-level 4)
+  (setq projectile-enable-caching t)
+  (setq projectile-indexing-method 'native)
+  (setq frame-title-format "%b [%I] %f")
+  (autoload 'iimage-mode "iimage" "support inline image minor mode" t)
+  (autoload 'turn-on-iimage-mode "iimage" "turn on inline image minor mode" t)
+  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+  (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (calc . t)))
+  (defun run-command(cmd)
+    (shell-command (concat "start /b " cmd)))
+  (defun src-res-up()
+    "src-res-update"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:update /path:\""
+      (concat (projectile-project-root) "src*" (projectile-project-root) "res*" (projectile-project-root) "frameworks")
+      "\" /closeonend:0")))
+  (defun src-res-ci()
+    "src-res-commit"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:commit /path:\""
+      (concat (projectile-project-root) "src*" (projectile-project-root) "res")
+      "\" /closeonend:0")))
+  (defun current-file-up()
+    "update current file"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:update /path:\""
+      (buffer-file-name)
+      "\" /closeonend:0")))
+  (defun current-file-log()
+    "show current file log"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:log /path:\"" (buffer-file-name) "\" closeonend:0")))
+
+  (defun current-file-ci()
+    "update current file"
+    (interactive)
+    (run-command
+     (concat
+      "TortoiseProc.exe /command:commit /path:\""
+      (buffer-file-name)
+      "\" /closeonend:0")))
+  (defun open-current-folder()
+    "open current buffer folder"
+    (interactive)
+    (run-command (concat "start /b " (file-name-directory buffer-file-name))))
+  (defun move-to-brance-and-commit()
+    "move file to brance folder and commit it."
+    (interactive)
+    ())
+  (defun run-game()
+    "run game"
+    (interactive)
+    (run-command "start /b .\v4run.bat"))
+  (evil-leader/set-key
+    "ou" 'src-res-up
+    "oc" 'src-res-ci
+    "ol" 'current-file-log
+    "or" 'run-game
+    "of" 'open-current-folder)
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
