@@ -403,6 +403,13 @@ values."
   ;; (add-to-list 'auto-mode-alist
   ;;              '("Capstanfile\\'" . yaml-mode))
 
+  ;;开启全局快捷删除方式
+  (global-hungry-delete-mode t)
+
+  ;;设置项目开启cache
+  (setq projectile-enable-caching t)
+  (setq projectile-indexing-method 'native)
+
   ;; (defun js-indent-line ()
   ;;   "Indent the current line as JavaScript."
   ;;   (interactive)
@@ -434,75 +441,12 @@ values."
   ;;     (fundamental-mode)))
   ;; (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
 
-  ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
-  ;; (setq-default tab-width 4)
-  ;; (setq-default lua-indent-level 4)
-  ;; (setq-default c-c++-indent-level 4)
-  (setq projectile-enable-caching t)
-  (setq projectile-indexing-method 'native)
+  (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
+
   ;; (autoload 'iimage-mode "iimage" "support inline image minor mode" t)
   ;; (autoload 'turn-on-iimage-mode "iimage" "turn on inline image minor mode" t)
   ;; (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
   ;; (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (calc . t)))
-  ;; (defun run-command(cmd)
-  ;;   (shell-command (concat "start /b " cmd)))
-  ;; (defun src-res-up()
-  ;;   "src-res-update"
-  ;;   (interactive)
-  ;;   (run-command
-  ;;    (concat
-  ;;     "TortoiseProc.exe /command:update /path:\""
-  ;;     (concat (projectile-project-root) "src*" (projectile-project-root) "res*" (projectile-project-root) "frameworks")
-  ;;     "\" /closeonend:0")))
-  ;; (defun src-res-ci()
-  ;;   "src-res-commit"
-  ;;   (interactive)
-  ;;   (run-command
-  ;;    (concat
-  ;;     "TortoiseProc.exe /command:commit /path:\""
-  ;;     (concat (projectile-project-root) "src*" (projectile-project-root) "res")
-  ;;     "\" /closeonend:0")))
-  ;; (defun current-file-up()
-  ;;   "update current file"
-  ;;   (interactive)
-  ;;   (run-command
-  ;;    (concat
-  ;;     "TortoiseProc.exe /command:update /path:\""
-  ;;     (buffer-file-name)
-  ;;     "\" /closeonend:0")))
-  ;; (defun current-file-log()
-  ;;   "show current file log"
-  ;;   (interactive)
-  ;;   (run-command
-  ;;    (concat
-  ;;     "TortoiseProc.exe /command:log /path:\"" (buffer-file-name) "\" closeonend:0")))
-
-  ;; (defun current-file-ci()
-  ;;   "update current file"
-  ;;   (interactive)
-  ;;   (run-command
-  ;;    (concat
-  ;;     "TortoiseProc.exe /command:commit /path:\""
-  ;;     (buffer-file-name)
-  ;;     "\" /closeonend:0")))
-  ;; (defun open-current-folder()
-  ;;   "open current buffer folder"
-  ;;   (interactive)
-  ;;   (run-command (concat "start /b " (file-name-directory buffer-file-name))))
-  ;; (defun move-to-brance-and-commit()
-  ;;   "move file to brance folder and commit it."
-  ;;   (interactive)
-  ;;   ())
-  ;; (defun run-game()
-  ;;   "run game"
-  ;;   (interactive)
-  ;;   (run-command "start /b .\v4run.bat"))
-  ;; (evil-leader/set-key
-  ;;   "ou" 'src-res-up
-  ;;   "oc" 'src-res-ci
-  ;;   "ol" 'current-file-log
-  ;;   "or" 'run-game
-  ;;   "of" 'open-current-folder)
   )
 
 ;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
@@ -527,3 +471,17 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  )
 )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (web-completion-data company yasnippet auto-complete gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub with-editor youdao-dictionary yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify uuidgen use-package unfill toc-org tide tagedit smex slim-mode shell-pop scss-mode sass-mode restart-emacs request ranger rainbow-mode rainbow-identifiers racket-mode pyvenv pytest pyenv-mode py-isort pug-mode prodigy popwin pip-requirements persp-mode pcre2el paradox origami org-pomodoro org-plus-contrib org-mime open-junk-file ob-restclient ob-http neotree mwim multi-term move-text mmm-mode markdown-toc macrostep lua-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc ivy-hydra indent-guide ibuffer-projectile hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers golden-ratio gnuplot ggtags fuzzy flyspell-correct-ivy flycheck-pos-tip flx fill-column-indicator expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-matchit evil-iedit-state evil-anzu eshell-z eshell-prompt-extras esh-help engine-mode emmet-mode elisp-slime-nav dumb-jump diminish cython-mode counsel company-web company-tern company-statistics company-restclient company-c-headers company-anaconda column-enforce-mode color-identifiers-mode coffee-mode cmake-mode clojure-snippets clj-refactor cider-eval-sexp-fu bracketed-paste bind-map auto-yasnippet auto-highlight-symbol auto-compile async aggressive-indent adaptive-wrap ace-window ace-link))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
