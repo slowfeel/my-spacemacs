@@ -369,42 +369,39 @@ values."
     (when (and (spacemacs/system-is-mac) window-system)
       (spacemacs//set-monospaced-font "DejaVu Sans Mono" "Hiragino Sans GB" 14 16)))
 
-  ;; ;; Setting Chinese Font
-  ;; (when (and (spacemacs/system-is-mswindows) window-system)
-  ;;   (setq ispell-program-name "aspell")
-  ;;   (setq w32-pass-alt-to-system nil)
-  ;;   (setq w32-apps-modifier 'super)
-  ;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
-  ;;     (set-fontset-font (frame-parameter nil 'font)
-  ;;                       charset
-  ;;                       (font-spec :family "Microsoft Yahei" :size 14))))
+  ;; Setting Chinese Font
+  (when (and (spacemacs/system-is-mswindows) window-system)
+    (setq ispell-program-name "aspell")
+    (setq w32-pass-alt-to-system nil)
+    (setq w32-apps-modifier 'super)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset
+                        (font-spec :family "Microsoft Yahei" :size 14))))
 
-  ;; (fset 'evil-visual-update-x-selection 'ignore)
+  (fset 'evil-visual-update-x-selection 'ignore)
 
-  ;; ;; force horizontal split window
-  ;; (setq split-width-threshold 120)
+  ;; force horizontal split window
+  (setq split-width-threshold 120)
 
   ;; (spacemacs|add-company-backends :modes text-mode)
 
-  ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-  ;; ;; temp fix for ivy-switch-buffer
-  ;; ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
+  ;; temp fix for ivy-switch-buffer
+  ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
 
-  ;; (global-hungry-delete-mode t)
-  ;; (spacemacs|diminish helm-gtags-mode)
-  ;; (spacemacs|diminish ggtags-mode)
-  ;; (spacemacs|diminish which-key-mode)
-  ;; (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
-  ;; (spacemacs|diminish counsel-mode)
-
-  ;; (evilified-state-evilify-map special-mode-map :mode special-mode)
-
-  ;; (add-to-list 'auto-mode-alist
-  ;;              '("Capstanfile\\'" . yaml-mode))
-
-  ;;开启全局快捷删除方式
   (global-hungry-delete-mode t)
+  (spacemacs|diminish helm-gtags-mode)
+  (spacemacs|diminish ggtags-mode)
+  (spacemacs|diminish which-key-mode)
+  (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
+  (spacemacs|diminish counsel-mode)
+
+  (evilified-state-evilify-map special-mode-map :mode special-mode)
+
+  (add-to-list 'auto-mode-alist
+               '("Capstanfile\\'" . yaml-mode))
 
   ;;设置项目开启cache
   (setq projectile-enable-caching t)
@@ -449,8 +446,8 @@ values."
   ;; (org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (calc . t)))
   )
 
-;; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
-;; (load custom-file 'no-error 'no-message)
+(setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+(load custom-file 'no-error 'no-message)
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
